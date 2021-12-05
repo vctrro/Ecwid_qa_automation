@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Threading;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using WebAuthorizationTest.PageObjects;
 
@@ -21,8 +22,12 @@ namespace WebAuthorizationTest
         [Test]
         public void Test1()
         {
-            searchPageObject.SearchText("Тов");
+            Thread.Sleep(6000);
+            searchPageObject.Search("Тов");
 
+            searchPageObject.Price(2, 5);
+
+            searchPageObject.InStock();
             //Assert.Pass();
 
         }
