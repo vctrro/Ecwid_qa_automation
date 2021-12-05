@@ -19,5 +19,9 @@
     <None Remove="Selenium.WebDriver.ChromeDriver" />
     <None Remove="Selenium.Firefox.WebDriver" />
     <None Remove="Selenium.Mozilla.Firefox.Webdriver" />
+    <None Remove="PageObjects\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PageObjects\" />
   </ItemGroup>
 </Project>
