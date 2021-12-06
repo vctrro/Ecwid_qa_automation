@@ -7,7 +7,7 @@ namespace WebAuthorizationTest.PageObjects
     {
         private IWebDriver _webDriver;
 
-        private readonly By _searchInput = By.XPath("//input[@name='keyword']");
+        private readonly By _searchInput = By.Name("keyword");
         private readonly By _priceFromInput = By.XPath("//input[@aria-label='от']");
         private readonly By _priceToInput = By.XPath("//input[@aria-label='до']");
         private readonly By _inStockCheckBox = By.XPath("//input[@id='checkbox-in_stock']");
