@@ -28,6 +28,7 @@ namespace WebAuthorizationTest
             searchPageObject.Price(2, 5);
 
             //searchPageObject.InStock();
+
             //Assert.Pass();
 
         }
