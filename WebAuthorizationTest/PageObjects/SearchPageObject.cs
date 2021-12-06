@@ -31,7 +31,6 @@ namespace WebAuthorizationTest.PageObjects
         {
             _webDriver.FindElement(_priceFromInput).SendKeys(from.ToString());
             _webDriver.FindElement(_priceToInput).SendKeys(to.ToString());
-
         }
 
 
