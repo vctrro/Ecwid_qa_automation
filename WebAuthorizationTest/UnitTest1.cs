@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using WebAuthorizationTest.PageObjects;
 
 namespace WebAuthorizationTest
@@ -22,10 +23,17 @@ namespace WebAuthorizationTest
         [Test]
         public void Test1()
         {
-            Thread.Sleep(6000);
+            driver.Manage().Timeouts().ImplicitWait = System.TimeSpan.FromSeconds(6);
+            //Thread.Sleep(6000);
+
             searchPageObject.Search("Тов");
 
             searchPageObject.Price(2, 5);
+
+            WebElement tempElement = (new WebDriverWait(driver, System.TimeSpan.FromSeconds(6))
+                .Until<WebElement>((driver) => (WebElement)driver.FindElement(By.XPath("//input[@id='checkbox-in_stock']"))));
+
+            tempElement.Click();
 
             //searchPageObject.InStock();
 
