@@ -15,9 +15,17 @@ namespace WebAuthorizationTest
         [SetUp]
         public void Setup()
         {
-            driver = new OpenQA.Selenium.Chrome.ChromeDriver();
-            driver.Navigate().GoToUrl("https://buy-in-10-seconds.company.site/search");
+            driver = new OpenQA.Selenium.Chrome.ChromeDriver();        
             searchPageObject = new SearchPageObject(driver);
+        }
+
+        [Test]
+        [TestCase("1")]
+        [TestCase("Товар 2")]
+        [TestCase("5")]
+        public void Test2(string text)
+        {
+            searchPageObject.Search(text);
         }
 
         [Test]
@@ -28,15 +36,6 @@ namespace WebAuthorizationTest
             searchPageObject.Price(from, to);
 
             //Assert.Pass();
-        }
-
-        [Test]
-        [TestCase("1")]
-        [TestCase("Товар 2")]
-        [TestCase("5")]
-        public void Test2(string text)
-        {
-            searchPageObject.Search(text);
         }
 
         [Test]

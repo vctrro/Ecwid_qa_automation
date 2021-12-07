@@ -9,6 +9,7 @@ namespace WebAuthorizationTest.PageObjects
         private readonly IWebDriver _webDriver;
         private readonly WebDriverWait _wait;
 
+        private readonly string _pageURL = "https://buy-in-10-seconds.company.site/search";
         private readonly By _searchInput = By.Name("keyword");
         private readonly By _priceFromInput = By.XPath("//input[@aria-label='от']");
         private readonly By _priceToInput = By.XPath("//input[@aria-label='до']");
@@ -17,6 +18,7 @@ namespace WebAuthorizationTest.PageObjects
         public SearchPageObject(IWebDriver webDriver)
         {
             _webDriver = webDriver;
+            _webDriver.Navigate().GoToUrl(_pageURL);
             _wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(6));
         }
 
