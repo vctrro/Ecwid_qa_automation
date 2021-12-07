@@ -17,7 +17,8 @@ namespace WebAuthorizationTest
         private readonly string _siteURL = "https://buy-in-10-seconds.company.site";
 
         private readonly By _markerForSearch = By.XPath("//a[@class='grid-product__title']");
-
+        private readonly By _markerForPrice = By.XPath("//div[@class='grid-product__price-value ec-price-item']");
+        private readonly By _markerForStockAndSale = By.XPath("//div[@class='label__text']");
 
         [SetUp]
         public void Setup()
@@ -48,13 +49,23 @@ namespace WebAuthorizationTest
         }
 
         [Test]
-        [TestCase(1, 5)]
-        //[TestCase(2, 4)]
+        [TestCase(5, 6)]
+        [TestCase(2, 4)]
         public void PriceTest(int from, int to)
         {
             _searchPageObject.Price(from, to);
+            Thread.Sleep(1000);
 
-            //Assert.Pass();
+            var searchResults = _wait.Until(webDriver => _webDriver.FindElements(_markerForPrice));
+
+            foreach (var element in searchResults)
+            {
+                var price = Convert.ToDouble(element.Text.Substring(1));
+ 
+                if (price > to || price < from) Assert.Fail($"\nЦена \"{price}\" не соответствует диапазону \"{from}\" - \"{to}\"");
+            }
+
+            Assert.Pass();
         }
 
         [Test]
