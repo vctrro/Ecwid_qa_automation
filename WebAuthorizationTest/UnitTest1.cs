@@ -9,14 +9,17 @@ namespace WebAuthorizationTest
 
     public class Tests
     {
-        private IWebDriver driver;
-        private SearchPageObject searchPageObject;
+        private IWebDriver _webDriver;
+        private SearchPageObject _searchPageObject;
+        private readonly string _siteURL = "https://buy-in-10-seconds.company.site";
+
 
         [SetUp]
         public void Setup()
         {
-            driver = new OpenQA.Selenium.Chrome.ChromeDriver();        
-            searchPageObject = new SearchPageObject(driver);
+            _webDriver = new OpenQA.Selenium.Chrome.ChromeDriver();
+            _searchPageObject = new SearchPageObject(_webDriver);
+            _webDriver.Navigate().GoToUrl(_siteURL + _searchPageObject.PageURN);
         }
 
         [Test]
@@ -25,7 +28,7 @@ namespace WebAuthorizationTest
         //[TestCase("5")]
         public void SearchTest(string text)
         {
-            searchPageObject.Search(text);
+            _searchPageObject.Search(text);
         }
 
         [Test]
@@ -33,7 +36,7 @@ namespace WebAuthorizationTest
         //[TestCase(2, 4)]
         public void PriceTest(int from, int to)
         {
-            searchPageObject.Price(from, to);
+            _searchPageObject.Price(from, to);
 
             //Assert.Pass();
         }
@@ -41,19 +44,19 @@ namespace WebAuthorizationTest
         [Test]
         public void InStockTest()
         {
-            searchPageObject.InStock();
+            _searchPageObject.InStock();
         }
         
         [Test]
         public void OnSaleTest()
         {
-            searchPageObject.OnSale();
+            _searchPageObject.OnSale();
         }
 
         [TearDown]
         public void TearDown()
         {
-
+            //driver.Quit();
         }
     }
 }
