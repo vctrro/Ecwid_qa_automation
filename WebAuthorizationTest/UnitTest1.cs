@@ -21,17 +21,17 @@ namespace WebAuthorizationTest
 
         [Test]
         [TestCase("1")]
-        [TestCase("Товар 2")]
-        [TestCase("5")]
-        public void Test2(string text)
+        //[TestCase("Товар 2")]
+        //[TestCase("5")]
+        public void SearchTest(string text)
         {
             searchPageObject.Search(text);
         }
 
         [Test]
         [TestCase(1, 5)]
-        [TestCase(2, 4)]
-        public void Test1(int from, int to)
+        //[TestCase(2, 4)]
+        public void PriceTest(int from, int to)
         {
             searchPageObject.Price(from, to);
 
@@ -39,9 +39,15 @@ namespace WebAuthorizationTest
         }
 
         [Test]
-        public void Test3()
+        public void InStockTest()
         {
             searchPageObject.InStock();
+        }
+        
+        [Test]
+        public void OnSaleTest()
+        {
+            searchPageObject.OnSale();
         }
 
         [TearDown]

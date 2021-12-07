@@ -14,6 +14,7 @@ namespace WebAuthorizationTest.PageObjects
         private readonly By _priceFromInput = By.XPath("//input[@aria-label='от']");
         private readonly By _priceToInput = By.XPath("//input[@aria-label='до']");
         private readonly By _inStockCheckBox = By.XPath("//input[@id='checkbox-in_stock']");
+        private readonly By _onSaleCheckBox = By.XPath("//input[@id='checkbox-on_sale']");
 
         public SearchPageObject(IWebDriver webDriver)
         {
@@ -33,6 +34,12 @@ namespace WebAuthorizationTest.PageObjects
         {
             IWebElement inStockCheckBox = _wait.Until<IWebElement>(webDriver => _webDriver.FindElement(_inStockCheckBox));
             inStockCheckBox.Click();
+        }
+
+        public void OnSale()
+        {
+            IWebElement onSaleCheckBox = _wait.Until<IWebElement>(webDriver => _webDriver.FindElement(_onSaleCheckBox));
+            onSaleCheckBox.Click();
         }
 
         public void Price(int from, int to)
