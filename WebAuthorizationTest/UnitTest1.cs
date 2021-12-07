@@ -18,7 +18,7 @@ namespace WebAuthorizationTest
 
         private readonly By _markerForSearch = By.XPath("//a[@class='grid-product__title']");
         private readonly By _markerForPrice = By.XPath("//div[@class='grid-product__price-value ec-price-item']");
-        private readonly By _markerForStockAndSale = By.XPath("//div[@class='label__text']");
+        private readonly By _markerForStockAndSale = By.XPath("//div[@class='grid-product__image-wrap']");
 
         [SetUp]
         public void Setup()
@@ -31,7 +31,7 @@ namespace WebAuthorizationTest
 
         [Test]
         [TestCase("1")]
-        [TestCase("Товар")]
+        [TestCase("ТОвар")]
         [TestCase("5")]
         public void SearchTest(string keywords)
         {
@@ -40,17 +40,19 @@ namespace WebAuthorizationTest
 
             var searchResults = _wait.Until(webDriver => _webDriver.FindElements(_markerForSearch));
 
+            keywords = keywords.ToLower();
             foreach (var element in searchResults)
             {
-                if (!element.Text.Contains(keywords)) Assert.Fail($"\n\"{element.Text}\" not contain \"{keywords}\"");
+                if (element.Text.ToLower().Contains(keywords) == false)
+                    Assert.Fail($"\n\"{element.Text}\" не содержит \"{keywords}\"");
             }
 
             Assert.Pass();
         }
 
         [Test]
-        [TestCase(5, 6)]
-        [TestCase(2, 4)]
+        [TestCase(0, 1)]
+        [TestCase(1, 5)]
         public void PriceTest(int from, int to)
         {
             _searchPageObject.Price(from, to);
@@ -72,12 +74,34 @@ namespace WebAuthorizationTest
         public void InStockTest()
         {
             _searchPageObject.InStock();
+            Thread.Sleep(1000);
+
+            var searchResults = _wait.Until(webDriver => _webDriver.FindElements(_markerForStockAndSale));
+
+            foreach (var element in searchResults)
+            {
+                if (element.Text.ToLower().Contains("распродано") == true)
+                    Assert.Fail($"\nПоказаны товары без скидки");
+            }
+
+            Assert.Pass();
         }
 
         [Test]
         public void OnSaleTest()
         {
             _searchPageObject.OnSale();
+            Thread.Sleep(1000);
+
+            var searchResults = _wait.Until(webDriver => _webDriver.FindElements(_markerForStockAndSale));
+
+            foreach (var element in searchResults)
+            {
+                if (element.Text.ToLower().Contains("распродажа") == false)
+                    Assert.Fail($"\nНе все показанные товары в наличии");
+            }
+
+            Assert.Pass();
         }
 
         [TearDown]
