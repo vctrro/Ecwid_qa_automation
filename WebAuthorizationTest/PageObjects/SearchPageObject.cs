@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
-namespace WebAuthorizationTest.PageObjects
+namespace CompanySiteTests.PageObjects
 {
     public class SearchPageObject
     {

@@ -2,12 +2,12 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using WebAuthorizationTest.PageObjects;
+using CompanySiteTests.PageObjects;
 
-namespace WebAuthorizationTest
+namespace CompanySiteTests
 {
 
-    public class Tests
+    public class SearchPageTests
     {
         private IWebDriver _webDriver;
         private SearchPageObject _searchPageObject;
