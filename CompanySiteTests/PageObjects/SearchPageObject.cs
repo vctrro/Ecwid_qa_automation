@@ -68,10 +68,10 @@ namespace CompanySiteTests.PageObjects
         public IEnumerable<IWebElement> Price(int from, int to)
         {
             IWebElement priceFromField = _wait.Until<IWebElement>(webDriver => _webDriver.FindElement(_priceFromInput));
-            IWebElement priceToInput = _webDriver.FindElement(_priceToInput);
+            IWebElement priceToField = _webDriver.FindElement(_priceToInput);
             priceFromField.SendKeys(from.ToString());
-            priceToInput.SendKeys(to.ToString());
-            priceToInput.SendKeys(Keys.Enter);
+            priceToField.SendKeys(to.ToString());
+            priceToField.SendKeys(Keys.Enter);
 
             Thread.Sleep(1000);
 

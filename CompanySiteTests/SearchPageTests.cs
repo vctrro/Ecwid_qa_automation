@@ -26,6 +26,7 @@ namespace CompanySiteTests
         [TestCase("1")]
         [TestCase("ТОвар")]
         [TestCase("5")]
+        [TestCase("test")]
         public void SearchTest(string keywords)
         {
             var searchResults =  _searchPageObject.Search(keywords);
@@ -65,7 +66,7 @@ namespace CompanySiteTests
             foreach (var element in searchResults)
             {
                 if (element.Text.ToLower().Contains("распродано") == true)
-                    Assert.Fail($"\nПоказаны товары без скидки");
+                    Assert.Fail($"\nНе все показанные товары есть в наличии");
             }
 
             Assert.Pass();
@@ -74,12 +75,12 @@ namespace CompanySiteTests
         [Test]
         public void OnSaleTest()
         {
-            var searchResults = _searchPageObject.OnSale(); 
+            var searchResults = _searchPageObject.OnSale();
 
             foreach (var element in searchResults)
             {
                 if (element.Text.ToLower().Contains("распродажа") == false)
-                    Assert.Fail($"\nНе все показанные товары в наличии");
+                    Assert.Fail($"\nПоказаны товары без скидки");
             }
 
             Assert.Pass();
